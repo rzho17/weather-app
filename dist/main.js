@@ -1,1 +1,1 @@
-console.log("hi");
+(async a=>{const t="214203c486864879e59c9aa802929646";try{const a=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=vancouver&appid=${t}&units=metric`),o=await a.json(),c=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${o.coord.lat}&lon=${o.coord.lon}&appid=${t}&units=metric`),e=await c.json();console.log(o),console.log(e)}catch(a){console.log(a)}})();
