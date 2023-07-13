@@ -1,0 +1,49 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  margin: 1rem;
+}
+
+.searchContainer {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+}
+
+.searchContainer,
+.searchContainer > * {
+  border: 1px solid;
+  width: max-content;
+  margin: 0;
+
+  border-radius: 10px;
+}
+
+.searchContainer > input[type="text"] {
+  height: 2rem;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  border: 0;
+}
+
+.searchContainer > input[type="submit"] {
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  margin-right: 0.5rem;
+
+  background-image: url(assets/sun.jpg);
+  background-size: cover;
+}
