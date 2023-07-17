@@ -15,6 +15,7 @@ img {
 header {
   margin: 1rem;
   width: 90%;
+  max-width: 500px;
 }
 
 .searchContainer {
@@ -60,6 +61,8 @@ header {
 
 main {
   width: 90%;
+  /* width: 90vw; */
+  max-width: 500px;
 }
 .weatherInfo {
   border: 1px solid;
@@ -110,4 +113,62 @@ main {
 .tempDisplay > img {
   width: 10rem;
   height: auto;
+}
+
+/* forecast */
+
+.forecastControl {
+  display: flex;
+  gap: 3rem;
+  margin: 1rem 0;
+}
+
+.forecast {
+  border: 1px solid;
+  padding: 1rem;
+}
+
+.forecastInfo {
+  border: 1px solid;
+  padding: 1rem;
+  width: 6rem;
+}
+
+.forecastDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.fcTimes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fcDetailsImg {
+  align-self: flex-end;
+}
+
+/* details */
+
+.detailBoxContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.detailBox {
+  padding: 0 1rem 1rem;
+  border: 1px solid;
+  border-radius: 10px;
+  height: 4rem;
+}
+
+.detailBoxInfoData {
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
