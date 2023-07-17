@@ -8,8 +8,13 @@ body {
   align-items: center;
 }
 
+img {
+  height: 2rem;
+}
+
 header {
   margin: 1rem;
+  width: 90%;
 }
 
 .searchContainer {
@@ -22,6 +27,9 @@ header {
 .searchContainer > * {
   border: 1px solid;
   width: max-content;
+  /* width: 90%; */
+
+  width: 100%;
   margin: 0;
 
   border-radius: 10px;
@@ -46,4 +54,60 @@ header {
 
   background-image: url(assets/sun.jpg);
   background-size: cover;
+}
+
+/* weather info */
+
+main {
+  width: 90%;
+}
+.weatherInfo {
+  border: 1px solid;
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: sp; */
+
+  display: grid;
+  grid-template-areas:
+    "today today today today today today "
+    "weather weather weather weather weather weather"
+    "weather weather weather weather weather weather"
+    "loc loc loc loc loc loc";
+
+  padding: 1rem;
+}
+.date,
+.weather {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  grid-area: today;
+  margin-bottom: 1rem;
+}
+
+.weather {
+  grid-area: weather;
+}
+
+.location {
+  grid-area: loc;
+  margin-top: 1rem;
+}
+
+.temp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.currentTemp {
+  font-size: 5rem;
+}
+
+.tempDisplay > img {
+  width: 10rem;
+  height: auto;
 }
