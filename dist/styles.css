@@ -37,6 +37,10 @@ header {
   max-width: 500px;
 }
 
+label {
+  display: none;
+}
+
 .searchContainer {
   display: flex;
   position: relative;
@@ -163,6 +167,7 @@ main {
 
   /* border: 1px solid; */
   padding: 1rem;
+  padding-left: 0;
 
   overflow: auto;
   white-space: nowrap;
