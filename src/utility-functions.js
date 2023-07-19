@@ -1,4 +1,5 @@
 import weatherFetch from "./api-functions";
+import { removeError, updateWeatherInfo } from "./dom-functions";
 
 const getCity = () => {
   const form = document.querySelector("form");
@@ -13,6 +14,7 @@ const getCity = () => {
     form.reset();
 
     weatherFetch(city);
+    removeError();
   });
 };
 
