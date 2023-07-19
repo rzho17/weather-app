@@ -14,7 +14,7 @@ export const removeError = () => {
   const header = document.querySelector("header");
   const error = document.querySelector(".error");
 
-  if (header.childElementCount > 0) {
+  if (header.childElementCount > 1) {
     header.removeChild(error);
   }
 };
