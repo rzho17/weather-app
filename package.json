@@ -18,5 +18,8 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "webpack": "^5.88.1"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
   }
 }
