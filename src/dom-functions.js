@@ -1,5 +1,5 @@
 import { fromUnixTime, getDate } from "date-fns";
-import { getCurrentDate, findMonth, findDay } from "./utility-functions";
+import { getLocalDate, findMonth, findDay } from "./utility-functions";
 
 export const showError = () => {
   const header = document.querySelector("header");
@@ -22,15 +22,19 @@ export const removeError = () => {
   }
 };
 
-export const updateWeatherInfo = (obj) => {
-  //   console.log(obj);
-  console.log(obj);
+const createHighlight = () => {
+  const location = document.querySelector(".location");
+  const highlight = document.createElement("span");
+  highlight.className = "highlight";
+  highlight.textContent = "@";
 
-  //   console.log(getCurrentDate(obj.dt, obj.timezone));
+  location.append(highlight);
+};
 
-  const date = getCurrentDate(obj.dt, obj.timezone);
+export const updateWeatherInfo = (weatherData) => {
+  console.log(weatherData);
 
-  //   console.log(date.getMonth());
+  const date = getLocalDate(weatherData.dt, weatherData.timezone);
 
   const today = document.querySelector(".today");
   const month = document.querySelector(".month");
@@ -40,14 +44,20 @@ export const updateWeatherInfo = (obj) => {
   const weatherImg = document.querySelector(".tempDisplay");
   const location = document.querySelector(".location");
 
-  const currentMonth = fromUnixTime(obj.dt);
-
-  //   console.log(findMonth(currentMonth.getMonth()));
+  const currentMonth = fromUnixTime(weatherData.dt);
 
   month.textContent = `
     ${findDay(date.getDay())} 
     ${date.getDate()}
-    ${findMonth(date.getMonth())}  `;
+    ${findMonth(date.getMonth())}  ${date.getHours()}:${date.getMinutes()}`;
+
+  currentTemp.textContent = Math.round(weatherData.main.temp);
+
+  realTemp.textContent = `Feels like ${Math.round(
+    weatherData.main.feels_like
+  )}`;
+
+  location.textContent = weatherData.name;
 };
 
 export const placeholder = () => {};

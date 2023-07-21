@@ -1,3 +1,4 @@
+import { parseISO, parse } from "date-fns";
 import weatherFetch from "./api-functions";
 import { removeError, updateWeatherInfo } from "./dom-functions";
 
@@ -19,11 +20,12 @@ const getCity = () => {
 };
 
 // Date functions
-export const getCurrentDate = (dt, timezone) => {
-  const utcSeconds = parseInt(dt, 10) + parseInt(timezone, 10);
+export const getLocalDate = (dt, timezone) => {
+  //takes current time in unix, timezone difference, and adds 7 hours to adjust for correct local time
+  const utcSeconds = parseInt(dt, 10) + parseInt(timezone, 10) + 25200;
   const utcMilliseconds = utcSeconds * 1000;
-  const localDate = new Date(utcMilliseconds);
-  //   const localDate = new Date(utcMilliseconds).toUTCString();
+  const localDateString = new Date(utcMilliseconds).toUTCString();
+  const localDate = new Date(localDateString);
 
   return localDate;
 };
