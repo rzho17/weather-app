@@ -134,14 +134,20 @@ main {
 }
 
 .location {
+  color: var(--gray);
   grid-area: loc;
   margin-top: 1rem;
+  white-space: nowrap;
 }
 
 .temp {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.currentTempContainer > .highlight {
+  font-size: 3rem;
 }
 
 .currentTemp {
