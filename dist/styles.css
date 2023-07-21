@@ -131,6 +131,7 @@ main {
 
 .weather {
   grid-area: weather;
+  gap: 1rem;
 }
 
 .location {
@@ -146,14 +147,30 @@ main {
   justify-content: center;
 }
 
+.currentTempContainer {
+  display: flex;
+}
 .currentTempContainer > .highlight {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .currentTemp {
   font-size: 5rem;
 }
 
+/* .realTemp {
+  margin: 1rem;
+} */
+
+.tempDisplay {
+  display: flex;
+  flex-direction: column;
+}
+
+.conditions {
+  text-align: center;
+  /* margin: 1rem; */
+}
 .tempDisplay > img {
   width: 10rem;
   height: auto;

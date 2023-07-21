@@ -41,7 +41,8 @@ export const updateWeatherInfo = (weatherData) => {
   const currentTemp = document.querySelector(".currentTemp");
   const degree = document.querySelector(".highlight");
   const realTemp = document.querySelector(".realTemp");
-  const weatherImg = document.querySelector(".tempDisplay");
+  const weatherImg = document.querySelector(".weatherImg");
+  const conditions = document.querySelector(".conditions");
   const location = document.querySelector(".location");
 
   const currentMonth = fromUnixTime(weatherData.dt);
@@ -57,6 +58,15 @@ export const updateWeatherInfo = (weatherData) => {
     weatherData.main.feels_like
   )}`;
 
+  //   updateWeatherImg("01d.png");
+
+  //   weatherImg.src = updateWeatherImg("01d.png");
+  const icon = weatherData.weather[0].icon;
+
+  //   console.log(west);
+
+  weatherImg.src = `https://openweathermap.org/img/wn/${icon}.png`;
+  conditions.textContent = weatherData.weather[0].description;
   location.textContent = weatherData.name;
 };
 
