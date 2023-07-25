@@ -1,5 +1,11 @@
 import { fromUnixTime, getDate } from "date-fns";
-import { getLocalDate, findMonth, findDay } from "./utility-functions";
+import {
+  getLocalDate,
+  findMonth,
+  findDay,
+  setLowMinutes,
+  setFahrenheit,
+} from "./utility-functions";
 
 export const showError = () => {
   const header = document.querySelector("header");
@@ -22,14 +28,14 @@ export const removeError = () => {
   }
 };
 
-const createHighlight = () => {
-  const location = document.querySelector(".location");
-  const highlight = document.createElement("span");
-  highlight.className = "highlight";
-  highlight.textContent = "@";
+// const createHighlight = () => {
+//   const location = document.querySelector(".location");
+//   const highlight = document.createElement("span");
+//   highlight.className = "highlight";
+//   highlight.textContent = "@";
 
-  location.append(highlight);
-};
+//   location.append(highlight);
+// };
 
 export const updateWeatherInfo = (weatherData) => {
   console.log(weatherData);
@@ -44,13 +50,23 @@ export const updateWeatherInfo = (weatherData) => {
   const weatherImg = document.querySelector(".weatherImg");
   const conditions = document.querySelector(".conditions");
   const location = document.querySelector(".location");
+  let getMinutes = date.getMinutes();
+  let getHours = date.getHours();
+
+  getMinutes = setLowMinutes(getMinutes);
+  getHours = setLowMinutes(getHours);
 
   const currentMonth = fromUnixTime(weatherData.dt);
+
+  console.log(date);
+  //   console.log(date.getMinutes());
+
+  //   console.log(getMinutes);
 
   month.textContent = `
     ${findDay(date.getDay())} 
     ${date.getDate()}
-    ${findMonth(date.getMonth())}  ${date.getHours()}:${date.getMinutes()}`;
+    ${findMonth(date.getMonth())}  ${getHours}:${getMinutes}`;
 
   currentTemp.textContent = Math.round(weatherData.main.temp);
 
@@ -58,12 +74,10 @@ export const updateWeatherInfo = (weatherData) => {
     weatherData.main.feels_like
   )}`;
 
-  //   updateWeatherImg("01d.png");
+  //using destructuring to gather only the weather and icon needed from the api
+  const { weather } = weatherData;
 
-  //   weatherImg.src = updateWeatherImg("01d.png");
-  const icon = weatherData.weather[0].icon;
-
-  //   console.log(west);
+  const [{ icon }] = weather;
 
   weatherImg.src = `https://openweathermap.org/img/wn/${icon}.png`;
   conditions.textContent = weatherData.weather[0].description;

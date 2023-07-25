@@ -1,6 +1,7 @@
-import getCity from "./utility-functions";
+import getCity, { setFahrenheit } from "./utility-functions";
 import weatherFetch from "./api-functions";
 
-getCity();
+// getCity();
 
-weatherFetch("Vancouver");
+weatherFetch("Vancouver", "metric");
+setFahrenheit("Vancouver");
