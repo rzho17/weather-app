@@ -2,18 +2,33 @@ import { parseISO, parse } from "date-fns";
 import weatherFetch, { fetchFahrenheit } from "./api-functions";
 import { removeError, updateWeatherInfo } from "./dom-functions";
 
+const getDegree = (degree) => {
+  const test = degree;
+  console.log(test);
+  //   console.log("yo");
+  return test;
+};
+
+let switched = "celsius";
+
 const switchDegree = (city) => {
   const fahrenheit = "imperial";
   const celsius = "metric";
   let isSwitched = false;
-  let switched;
+  //   let switched;
 
   return () => {
-    switched = isSwitched ? celsius : fahrenheit;
-    isSwitched = !isSwitched;
-    console.log(switched);
-    weatherFetch(city, switched);
-    console.log(city);
+    // console.log(switched);
+    if (switched === fahrenheit) {
+      switched = "metric";
+      weatherFetch(city, switched);
+    } else {
+      switched = isSwitched ? celsius : fahrenheit;
+      isSwitched = !isSwitched;
+      weatherFetch(city, switched);
+    }
+    // console.log(city);
+    // getDegree(switched);
   };
 };
 
@@ -37,13 +52,16 @@ const getCity = (() => {
 
   let city;
 
+  //   console.log("hi");
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
     city = formData.get("city");
 
-    weatherFetch(city, "metric");
+    // console.log(switched);
+    weatherFetch(city, switched);
 
     setFahrenheit(city);
     removeError();
@@ -72,7 +90,6 @@ export const setLowMinutes = (minutes) => {
     minutes = "0" + minutes.toString();
   }
 
-  //   console.log(minutes);
   return minutes;
 };
 

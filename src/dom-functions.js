@@ -28,15 +28,6 @@ export const removeError = () => {
   }
 };
 
-// const createHighlight = () => {
-//   const location = document.querySelector(".location");
-//   const highlight = document.createElement("span");
-//   highlight.className = "highlight";
-//   highlight.textContent = "@";
-
-//   location.append(highlight);
-// };
-
 export const updateWeatherInfo = (weatherData) => {
   console.log(weatherData);
 
@@ -59,9 +50,6 @@ export const updateWeatherInfo = (weatherData) => {
   const currentMonth = fromUnixTime(weatherData.dt);
 
   console.log(date);
-  //   console.log(date.getMinutes());
-
-  //   console.log(getMinutes);
 
   month.textContent = `
     ${findDay(date.getDay())} 
@@ -84,4 +72,55 @@ export const updateWeatherInfo = (weatherData) => {
   location.textContent = weatherData.name;
 };
 
+const makeForecastContainer = () => {
+  const forecast = document.querySelector(".forecast");
+  forecast.className = "forecast";
+
+  const fcInfo = document.createElement("div");
+  fcInfo.className = "forecastInfo";
+
+  const fcDetails = document.createElement("div");
+  fcDetails.className = "forecastDetails";
+
+  const fcDetailsImg = document.createElement("div");
+  fcDetails.className = "fcDetailsImg";
+
+  const fcTimes = document.createElement("div");
+  fcTimes.className = "fcTimes";
+
+  const fcTime = document.createElement("div");
+  fcTime.className = "fcTime";
+
+  const fcTemp = document.createElement("div");
+  fcTemp.className = "fcTemp";
+
+  const fcTempInfo = document.createElement("span");
+  fcTempInfo.className = "fcTempInfo";
+
+  const highlight = document.createElement("span");
+  highlight.className = "highlight";
+
+  forecast.append(fcInfo);
+
+  fcInfo.append(fcDetails);
+
+  fcDetails.append(fcDetailsImg, fcTimes);
+
+  fcTimes.append(fcTime, fcTemp);
+
+  fcTemp.append(fcTempInfo, highlight);
+};
+
+const updateForecastInfo = (weatherData) => {
+  const fcDetailsImg = document.querySelector("fcDetailsImg");
+  const fcTime = document.querySelector("fcTime");
+  const fcTempInfo = document.querySelector("fcTempInfo");
+  const highlight = document.querySelector("highlight");
+
+  //   const processedData = { weatherData.list };
+};
+
+const tempContainer = document.querySelector(".currentTempContainer");
+
+tempContainer.addEventListener("click", makeForecastContainer);
 export const placeholder = () => {};

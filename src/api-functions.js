@@ -14,6 +14,8 @@ const weatherFetch = async (city, unit) => {
   const apiKey = "214203c486864879e59c9aa802929646";
   // const key = "d5ffae0a3ebc4d899a5204429230507";
 
+  // console.log(unit);
+
   try {
     const currentWeather = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
@@ -23,7 +25,7 @@ const weatherFetch = async (city, unit) => {
 
     const result = await currentWeather.json();
 
-    forecastFetch(result.coord.lat, result.coord.lon, apiKey);
+    forecastFetch(result.coord.lat, result.coord.lon, apiKey, unit);
 
     updateWeatherInfo(result);
 
