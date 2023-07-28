@@ -1,5 +1,10 @@
-import { removeError, showError, updateWeatherInfo } from "./dom-functions";
-import { setFahrenheit } from "./utility-functions";
+import {
+  removeError,
+  showError,
+  updateForecastInfo,
+  updateWeatherInfo,
+} from "./dom-functions";
+import { addForecastContainer, setFahrenheit } from "./utility-functions";
 
 const forecastFetch = async (lat, lon, apiKey, unit) => {
   const forecast = await fetch(
@@ -8,6 +13,8 @@ const forecastFetch = async (lat, lon, apiKey, unit) => {
   const forecastResult = await forecast.json();
 
   console.log(forecastResult);
+  addForecastContainer(forecastResult);
+  updateForecastInfo(forecastResult);
 };
 
 const weatherFetch = async (city, unit) => {

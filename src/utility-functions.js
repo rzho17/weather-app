@@ -1,6 +1,13 @@
 import { parseISO, parse } from "date-fns";
 import weatherFetch, { fetchFahrenheit } from "./api-functions";
-import { removeError, updateWeatherInfo } from "./dom-functions";
+import {
+  clearForecast,
+  makeForecastContainer,
+  removeError,
+  updateFcImage,
+  updateForecastInfo,
+  updateWeatherInfo,
+} from "./dom-functions";
 
 const getDegree = (degree) => {
   const test = degree;
@@ -9,7 +16,7 @@ const getDegree = (degree) => {
   return test;
 };
 
-let switched = "celsius";
+let switched = "metric";
 
 const switchDegree = (city) => {
   const fahrenheit = "imperial";
@@ -19,6 +26,7 @@ const switchDegree = (city) => {
 
   return () => {
     // console.log(switched);
+    //Allows the switch between metric and imperial units without having to double click after search
     if (switched === fahrenheit) {
       switched = "metric";
       weatherFetch(city, switched);
@@ -27,8 +35,6 @@ const switchDegree = (city) => {
       isSwitched = !isSwitched;
       weatherFetch(city, switched);
     }
-    // console.log(city);
-    // getDegree(switched);
   };
 };
 
@@ -60,8 +66,9 @@ const getCity = (() => {
     const formData = new FormData(form);
     city = formData.get("city");
 
-    // console.log(switched);
+    console.log(switched);
     weatherFetch(city, switched);
+    clearForecast();
 
     setFahrenheit(city);
     removeError();
@@ -118,4 +125,79 @@ export const findDay = (day) => {
   return dayNames[day];
 };
 
+// forecast finder functions
+
+export const addForecastContainer = (weatherData) => {
+  for (let i = 0; i < weatherData.list.length / 8; i++) {
+    // makeForecastContainer();
+    // console.log(i);
+  }
+  //   findForecastHigh(weatherData);
+};
+
+export const findForecastHigh = (forecast) => {
+  let high = 0;
+  //   let low = weatherData.list[0].main.temp_max;
+  let index = 0;
+  let x = 0;
+
+  //   const highLow = temp;
+
+  for (let i = 0; i <= forecast.list.length; i += 8) {
+    for (let j = i; j < i + 8; j++) {
+      if (x >= 8) {
+        // console.log(i);
+        x = 0;
+        // index = 0;
+        console.log("top", high);
+        console.log(index);
+        // updateFcImage(forecast);
+        makeForecastContainer(forecast, index);
+
+        // console.log("break");
+        if (i < forecast.list.length) {
+          high = Math.round(forecast.list[j].main.temp_max);
+          index = j;
+          //   console.log(high);
+        }
+      }
+
+      if (i < forecast.list.length) {
+        if (forecast.list[j].main.temp_max > high) {
+          high = Math.round(forecast.list[j].main.temp_max);
+          index = j;
+        }
+      }
+
+      x++;
+    }
+  }
+};
+
+export const findForecastLow = (forecast) => {
+  let low = forecast.list[0].main.temp_max;
+  let x = 0;
+
+  //   console.log(low);
+  for (let i = 0; i <= forecast.list.length; i += 8) {
+    for (let j = i; j < i + 8; j++) {
+      if (x >= 8) {
+        x = 0;
+        console.log("low", low);
+        console.log("break");
+        if (i < forecast.list.length) {
+          low = Math.round(forecast.list[j].main.temp_min);
+        }
+      }
+
+      if (i < forecast.list.length) {
+        if (forecast.list[j].main.temp_min < low) {
+          low = Math.round(forecast.list[j].main.temp_min);
+        }
+      }
+
+      x++;
+    }
+  }
+};
 export default getCity;

@@ -217,7 +217,10 @@ main {
   gap: 1rem;
 }
 
-.fcTime {
+.fcTime,
+.fcTemp {
+  display: flex;
+  justify-content: space-between;
   color: var(--gray);
 }
 .fcDetailsImg {
