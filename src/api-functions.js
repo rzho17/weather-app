@@ -13,7 +13,7 @@ const forecastFetch = async (lat, lon, apiKey, unit) => {
   const forecastResult = await forecast.json();
 
   console.log(forecastResult);
-  addForecastContainer(forecastResult);
+  // addForecastContainer(forecastResult);
   updateForecastInfo(forecastResult);
 };
 

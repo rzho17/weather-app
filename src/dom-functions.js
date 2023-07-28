@@ -75,6 +75,8 @@ export const updateWeatherInfo = (weatherData) => {
   location.textContent = weatherData.name;
 };
 
+// forecast functions
+
 export const clearForecast = () => {
   const forecast = document.querySelector(".forecast");
 
@@ -87,7 +89,19 @@ export const updateFcImage = (forecast, index) => {
   return `https://openweathermap.org/img/wn/${icon}.png`;
 };
 
-export const makeForecastContainer = (forecastData, index) => {
+export const updateFcDate = (forecast, index) => {
+  const date = new Date(forecast.list[index].dt_txt);
+  const dayOfWeek = findDay(date.getDay());
+
+  return dayOfWeek;
+};
+
+export const setFcLow = (low) => {
+  const fcLow = document.querySelector(".fcTempInfo");
+  fcLow.textContent = low;
+};
+
+export const makeForecastContainer = (forecastData, index, high, low) => {
   const forecast = document.querySelector(".forecast");
   forecast.className = "forecast";
 
@@ -130,11 +144,11 @@ export const makeForecastContainer = (forecastData, index) => {
   //   highlight.className = "highlight";
 
   fcDetailsImg.src = updateFcImage(forecastData, index);
-  fcTime.textContent = "sunday";
-  fcTempInfo.textContent = "12";
-  fcTempHigh.textContent = "25";
-  highlight.textContent = "X";
-  highlightHigh.textContent = "X";
+  fcTime.textContent = updateFcDate(forecastData, index);
+  fcTempInfo.textContent = low;
+  fcTempHigh.textContent = high;
+  highlight.textContent = "°C";
+  highlightHigh.textContent = "°C";
 
   forecast.append(fcInfo);
 
@@ -153,63 +167,8 @@ export const makeForecastContainer = (forecastData, index) => {
 };
 
 export const updateForecastInfo = (weatherData) => {
-  const fcDetailsImg = document.querySelector("fcDetailsImg");
-  const fcTime = document.querySelector(".fcTime");
-  const fcTempInfo = document.querySelector(".fcTempInfo");
-  const highlight = document.querySelector(".highlight");
-  const fcTempHigh = document.querySelector(".fcTempInfo");
-  const highlightHigh = document.querySelector(".highlight");
-
-  //   console.log(weatherData.list);
-
-  //   console.log(weatherData.list.length);
-
-  //   fcTempHigh.textContent = weatherData;
   findForecastHigh(weatherData);
-  //   findForecastLow(weatherData);
-
-  //   let high = 0;
-  //   let low = weatherData.list[0].main.temp_max;
-  //   let x = 0;
-
-  //   //   console.log(low);
-  //   for (let i = 0; i <= weatherData.list.length; i += 8) {
-  //     for (let j = i; j < i + 8; j++) {
-  //       if (x >= 8) {
-  //         x = 0;
-  //         console.log("low", low);
-  //         console.log("break");
-  //         if (i < weatherData.list.length) {
-  //           low = Math.round(weatherData.list[j].main.temp_min);
-  //         }
-  //       }
-
-  //       if (i < weatherData.list.length) {
-  //         if (weatherData.list[j].main.temp_min < low) {
-  //           low = Math.round(weatherData.list[j].main.temp_min);
-  //         }
-  //       }
-
-  //       x++;
-  //     }
-  //   }
-
-  //   weatherData.list.forEach((item, index) => {
-  //     // console.log(item.main.temp_max);
-
-  //     console.log(index);
-  //     if (item.main.temp_max > high) {
-  //       high = item.main.temp_max;
-  //     }
-
-  //   });
-
-  //   console.log(high);
-  //   console.log(low);
-  //   console.log(weatherData.list);
+  findForecastLow(weatherData);
 };
 
-const tempContainer = document.querySelector(".currentTempContainer");
-
-tempContainer.addEventListener("click", makeForecastContainer);
 export const placeholder = () => {};

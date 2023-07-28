@@ -4,6 +4,7 @@ import {
   clearForecast,
   makeForecastContainer,
   removeError,
+  setFcLow,
   updateFcImage,
   updateForecastInfo,
   updateWeatherInfo,
@@ -127,12 +128,35 @@ export const findDay = (day) => {
 
 // forecast finder functions
 
-export const addForecastContainer = (weatherData) => {
-  for (let i = 0; i < weatherData.list.length / 8; i++) {
-    // makeForecastContainer();
-    // console.log(i);
+export const findForecastLow = (forecast) => {
+  let low = forecast.list[0].main.temp_max;
+  let x = 0;
+
+  //   console.log(low);
+  for (let i = 0; i <= forecast.list.length; i += 8) {
+    for (let j = i; j < i + 8; j++) {
+      if (x >= 8) {
+        x = 0;
+        // console.log("low", low);
+        // console.log("break");
+        // setFcLow(low);
+        // makeForecastContainer(null, null, null, low);
+        if (i < forecast.list.length) {
+          low = Math.round(forecast.list[j].main.temp_min);
+        }
+      }
+
+      if (i < forecast.list.length) {
+        if (forecast.list[j].main.temp_min < low) {
+          low = Math.round(forecast.list[j].main.temp_min);
+        }
+      }
+
+      x++;
+    }
   }
-  //   findForecastHigh(weatherData);
+
+  return low;
 };
 
 export const findForecastHigh = (forecast) => {
@@ -152,7 +176,7 @@ export const findForecastHigh = (forecast) => {
         console.log("top", high);
         console.log(index);
         // updateFcImage(forecast);
-        makeForecastContainer(forecast, index);
+        makeForecastContainer(forecast, index, high, findForecastLow(forecast));
 
         // console.log("break");
         if (i < forecast.list.length) {
@@ -172,32 +196,34 @@ export const findForecastHigh = (forecast) => {
       x++;
     }
   }
+
+  //   let low = forecast.list[0].main.temp_max;
+  //   let y = 0;
+
+  //   //   console.log(low);
+  //   for (let i = 0; i <= forecast.list.length; i += 8) {
+  //     for (let j = i; j < i + 8; j++) {
+  //       if (y >= 8) {
+  //         y = 0;
+  //         console.log("low", low);
+  //         console.log("break");
+  //         // setFcLow(low);
+  //         makeForecastContainer(forecast, index, high, low);
+  //         // makeForecastContainer(null, null, null, low);
+  //         if (i < forecast.list.length) {
+  //           low = Math.round(forecast.list[j].main.temp_min);
+  //         }
+  //       }
+
+  //       if (i < forecast.list.length) {
+  //         if (forecast.list[j].main.temp_min < low) {
+  //           low = Math.round(forecast.list[j].main.temp_min);
+  //         }
+  //       }
+
+  //       y++;
+  //     }
+  //   }
 };
 
-export const findForecastLow = (forecast) => {
-  let low = forecast.list[0].main.temp_max;
-  let x = 0;
-
-  //   console.log(low);
-  for (let i = 0; i <= forecast.list.length; i += 8) {
-    for (let j = i; j < i + 8; j++) {
-      if (x >= 8) {
-        x = 0;
-        console.log("low", low);
-        console.log("break");
-        if (i < forecast.list.length) {
-          low = Math.round(forecast.list[j].main.temp_min);
-        }
-      }
-
-      if (i < forecast.list.length) {
-        if (forecast.list[j].main.temp_min < low) {
-          low = Math.round(forecast.list[j].main.temp_min);
-        }
-      }
-
-      x++;
-    }
-  }
-};
 export default getCity;
