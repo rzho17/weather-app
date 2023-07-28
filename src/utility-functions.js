@@ -26,13 +26,13 @@ const switchDegree = (city) => {
   //   let switched;
 
   return () => {
-    // console.log(switched);
+    clearForecast();
     //Allows the switch between metric and imperial units without having to double click after search
     if (switched === fahrenheit) {
       switched = "metric";
       weatherFetch(city, switched);
     } else {
-      switched = isSwitched ? celsius : fahrenheit;
+      switched = switched === isSwitched ? celsius : fahrenheit;
       isSwitched = !isSwitched;
       weatherFetch(city, switched);
     }
@@ -94,7 +94,7 @@ export const getLocalDate = (dt, timezone) => {
 };
 
 export const setLowMinutes = (minutes) => {
-  if (minutes <= 10) {
+  if (minutes < 10) {
     minutes = "0" + minutes.toString();
   }
 
@@ -168,13 +168,15 @@ export const findForecastHigh = (forecast) => {
   //   const highLow = temp;
 
   for (let i = 0; i <= forecast.list.length; i += 8) {
+    //will set j to equal the previous value of i to find the daily high/low within each 5 day period
+    //loop will always run 8 times
     for (let j = i; j < i + 8; j++) {
       if (x >= 8) {
         // console.log(i);
         x = 0;
         // index = 0;
-        console.log("top", high);
-        console.log(index);
+        // console.log("top", high);
+        // console.log(index);
         // updateFcImage(forecast);
         makeForecastContainer(forecast, index, high, findForecastLow(forecast));
 

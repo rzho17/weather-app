@@ -1,4 +1,4 @@
-import getCity, { setFahrenheit } from "./utility-functions";
+import getCity, { setFahrenheit, switched } from "./utility-functions";
 import weatherFetch from "./api-functions";
 
 // getCity();

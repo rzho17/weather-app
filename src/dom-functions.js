@@ -32,7 +32,8 @@ export const removeError = () => {
 };
 
 export const updateWeatherInfo = (weatherData) => {
-  console.log(weatherData);
+  //   clearForecast();
+  //   console.log(weatherData);
 
   const date = getLocalDate(weatherData.dt, weatherData.timezone);
 
@@ -52,7 +53,7 @@ export const updateWeatherInfo = (weatherData) => {
 
   const currentMonth = fromUnixTime(weatherData.dt);
 
-  console.log(date);
+  //   console.log(date);
 
   month.textContent = `
     ${findDay(date.getDay())} 
