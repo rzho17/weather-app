@@ -8,6 +8,7 @@ import {
   findForecastHighLow,
   findForecastHigh,
   findForecastLow,
+  findWindSpeed,
 } from "./utility-functions";
 
 export const showError = () => {
@@ -33,7 +34,7 @@ export const removeError = () => {
 
 export const updateWeatherInfo = (weatherData) => {
   //   clearForecast();
-  //   console.log(weatherData);
+  console.log(weatherData);
 
   const date = getLocalDate(weatherData.dt, weatherData.timezone);
 
@@ -82,6 +83,28 @@ export const clearForecast = () => {
   const forecast = document.querySelector(".forecast");
 
   forecast.textContent = "";
+};
+
+export const switchTempValue = (variable) => {
+  const fcDegree = document.querySelectorAll(".forecastDetails .highlight");
+  const weatherBoxDegrees = document.querySelectorAll(".highlight");
+
+  //   console.log("hi");
+  fcDegree.forEach((item) => {
+    if (variable === "metric") {
+      item.textContent = "°C";
+    } else {
+      item.textContent = "°F";
+    }
+  });
+
+  weatherBoxDegrees.forEach((item) => {
+    if (variable === "metric") {
+      item.textContent = "°C";
+    } else {
+      item.textContent = "°F";
+    }
+  });
 };
 
 export const updateFcImage = (forecast, index) => {
@@ -170,6 +193,27 @@ export const makeForecastContainer = (forecastData, index, high, low) => {
 export const updateForecastInfo = (weatherData) => {
   findForecastHigh(weatherData);
   findForecastLow(weatherData);
+};
+
+export const updateDetailBox = (weatherData) => {
+  const dailyHigh = document.querySelector(".dailyHigh");
+  const dailyLow = document.querySelector(".dailyLow");
+  const humidity = document.querySelector(".humidity");
+  const windSpeed = document.querySelector(".windSpeed");
+
+  const { main } = weatherData;
+  const { wind } = weatherData;
+
+  const high = Math.round(main.temp_max);
+  const low = Math.round(main.temp_min);
+  //   console.log(weatherData.main.temp_max);
+
+  dailyHigh.textContent = high;
+  dailyLow.textContent = low;
+  humidity.textContent = main.humidity;
+  windSpeed.textContent = findWindSpeed(wind.speed);
+
+  //   windSpeed.textContent = "123123";
 };
 
 export const placeholder = () => {};

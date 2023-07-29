@@ -5,17 +5,11 @@ import {
   makeForecastContainer,
   removeError,
   setFcLow,
+  switchTempValue,
   updateFcImage,
   updateForecastInfo,
   updateWeatherInfo,
 } from "./dom-functions";
-
-const getDegree = (degree) => {
-  const test = degree;
-  console.log(test);
-  //   console.log("yo");
-  return test;
-};
 
 let switched = "metric";
 
@@ -169,7 +163,8 @@ export const findForecastHigh = (forecast) => {
 
   for (let i = 0; i <= forecast.list.length; i += 8) {
     //will set j to equal the previous value of i to find the daily high/low within each 5 day period
-    //loop will always run 8 times
+    //j will always loop through the most current i value to the i value + 8 to simulate a single day forecast
+    //this will allow the function to find the daily high/low for each day
     for (let j = i; j < i + 8; j++) {
       if (x >= 8) {
         // console.log(i);
@@ -198,6 +193,7 @@ export const findForecastHigh = (forecast) => {
       x++;
     }
   }
+  switchTempValue(switched);
 
   //   let low = forecast.list[0].main.temp_max;
   //   let y = 0;
@@ -226,6 +222,15 @@ export const findForecastHigh = (forecast) => {
   //       y++;
   //     }
   //   }
+};
+
+export const findWindSpeed = (windSpeed) => {
+  if (switched === "metric") {
+    const kmh = Math.round((windSpeed * 3600) / 1000);
+    return kmh;
+  }
+  const mph = Math.round(windSpeed);
+  return mph;
 };
 
 export default getCity;

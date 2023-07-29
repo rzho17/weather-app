@@ -1,6 +1,7 @@
 import {
   removeError,
   showError,
+  updateDetailBox,
   updateForecastInfo,
   updateWeatherInfo,
 } from "./dom-functions";
@@ -35,6 +36,8 @@ const weatherFetch = async (city, unit) => {
     forecastFetch(result.coord.lat, result.coord.lon, apiKey, unit);
 
     updateWeatherInfo(result);
+
+    updateDetailBox(result);
 
     // console.log(city);
 
