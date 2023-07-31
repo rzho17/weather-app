@@ -5,6 +5,7 @@ import {
   makeForecastContainer,
   removeError,
   setFcLow,
+  switchTempText,
   switchTempValue,
   updateFcImage,
   updateForecastInfo,
@@ -25,10 +26,12 @@ const switchDegree = (city) => {
     //Allows the switch between metric and imperial units without having to double click after search
     if (switched === fahrenheit) {
       switched = "metric";
+      switchTempText(switched);
       weatherFetch(city, switched);
     } else {
       switched = switched === isSwitched ? celsius : fahrenheit;
       isSwitched = !isSwitched;
+      switchTempText(switched);
       weatherFetch(city, switched);
     }
   };
@@ -37,16 +40,17 @@ const switchDegree = (city) => {
 let currentEvent = null;
 
 export const setFahrenheit = (city) => {
-  const tempContainer = document.querySelector(".currentTempContainer");
+  //   const tempContainer = document.querySelector(".currentTempContainer");
+  const switchTempBtn = document.querySelector(".switchTempBtn");
 
   //ensures the event will be the same instead of a new event being created and attached for each call on setFahrenheit
   if (currentEvent !== null) {
-    tempContainer.removeEventListener("click", currentEvent);
+    switchTempBtn.removeEventListener("click", currentEvent);
   }
 
   currentEvent = switchDegree(city);
 
-  tempContainer.addEventListener("click", currentEvent);
+  switchTempBtn.addEventListener("click", currentEvent);
 };
 
 const getCity = (() => {

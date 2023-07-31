@@ -114,6 +114,15 @@ export const switchTempValue = (variable) => {
   switchKmhToMph(speedMetric, variable);
 };
 
+export const switchTempText = (metric) => {
+  const switchTempBtn = document.querySelector(".switchTempBtn");
+  if (metric === "metric") {
+    switchTempBtn.textContent = "Display °F";
+  } else {
+    switchTempBtn.textContent = "Display °C";
+  }
+};
+
 export const updateFcImage = (forecast, index) => {
   const [{ icon }] = forecast.list[index].weather;
 
@@ -166,7 +175,7 @@ export const makeForecastContainer = (forecastData, index, high, low) => {
   highlight.className = "highlight";
 
   const fcTempHigh = document.createElement("span");
-  fcTempInfo.className = "fcTempInfo";
+  fcTempHigh.className = "fcTempInfo";
 
   const highlightHigh = document.createElement("span");
   highlightHigh.className = "highlight";
