@@ -4,6 +4,8 @@
   --gray: #bcbdbe;
   --dark: #222437;
   --highlightYellow: #fad02c;
+  --dailyLow: #bcbdbe;
+  --dailyHigh: #e9eaec;
 }
 body {
   min-height: 100vh;
@@ -183,10 +185,19 @@ main {
   color: var(--highlightYellow);
 }
 
+.switchTempBtn {
+  color: var(--gray);
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
 /* forecast */
 
 .forecastControl {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 3rem;
   margin: 1rem 0;
 }
@@ -230,8 +241,33 @@ main {
   justify-content: space-between;
   color: var(--gray);
 }
+
 .fcDetailsImg {
   align-self: flex-end;
+}
+
+.fcLow,
+.fcHigh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.fcLow > .highlight,
+.fcHigh > .highlight {
+  font-size: 0.9rem;
+  align-self: flex-start;
+}
+
+.fcLow > .fcTempInfo {
+  color: var(--dailyLow);
+}
+.fcHigh > .fcTempInfo {
+  color: var(--dailyHigh);
+}
+.fcTempInfo {
+  font-size: 1.2rem;
 }
 
 /* details */
@@ -259,6 +295,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  gap: 0.5rem;
 }
 
 .dataDegree,
@@ -266,4 +304,63 @@ main {
 .speedMetric {
   font-size: 1.5rem;
   color: var(--highlightYellow);
+}
+
+.dataDegree {
+  align-self: flex-start;
+}
+
+/* Media queries */
+
+@media only screen and (min-width: 768px) {
+  /* main {
+
+  } */
+  .forecast {
+    flex-direction: column;
+    overflow: visible;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .forecastInfo {
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .fcDetailsImg {
+    position: absolute;
+
+    right: 9rem;
+
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .forecastInfo {
+    /* padding-left: 0; */
+    /* padding-right: 0; */
+    width: 100%;
+  }
+
+  .forecastDetails,
+  .fcTimes,
+  .fcTemp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .fcTimes,
+  .fcTemp {
+    gap: 2rem;
+  }
+
+  .fcTimes {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
 }
