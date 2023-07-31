@@ -85,26 +85,33 @@ export const clearForecast = () => {
   forecast.textContent = "";
 };
 
+const switchCelToFah = (ele, variable) => {
+  ele.forEach((item) => {
+    if (variable === "metric") {
+      item.textContent = "°C";
+    } else {
+      item.textContent = "°F";
+    }
+  });
+};
+
+const switchKmhToMph = (ele, variable) => {
+  if (variable === "metric") {
+    ele.textContent = "Km/h";
+  } else {
+    ele.textContent = "Mph";
+  }
+};
 export const switchTempValue = (variable) => {
   const fcDegree = document.querySelectorAll(".forecastDetails .highlight");
   const weatherBoxDegrees = document.querySelectorAll(".highlight");
+  const detailDegree = document.querySelectorAll(".dataDegree");
+  const speedMetric = document.querySelector(".speedMetric");
 
-  //   console.log("hi");
-  fcDegree.forEach((item) => {
-    if (variable === "metric") {
-      item.textContent = "°C";
-    } else {
-      item.textContent = "°F";
-    }
-  });
-
-  weatherBoxDegrees.forEach((item) => {
-    if (variable === "metric") {
-      item.textContent = "°C";
-    } else {
-      item.textContent = "°F";
-    }
-  });
+  switchCelToFah(fcDegree, variable);
+  switchCelToFah(weatherBoxDegrees, variable);
+  switchCelToFah(detailDegree, variable);
+  switchKmhToMph(speedMetric, variable);
 };
 
 export const updateFcImage = (forecast, index) => {
