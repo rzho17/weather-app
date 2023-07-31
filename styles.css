@@ -261,7 +261,9 @@ main {
   align-items: center;
 }
 
-.dataDegree {
+.dataDegree,
+.dataPercent,
+.speedMetric {
   font-size: 1.5rem;
   color: var(--highlightYellow);
 }
