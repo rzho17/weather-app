@@ -1,4 +1,5 @@
 import {
+  clearForecast,
   removeError,
   showError,
   updateDetailBox,
@@ -38,6 +39,7 @@ const weatherFetch = async (city, unit) => {
     updateWeatherInfo(result);
 
     updateDetailBox(result);
+    clearForecast();
 
     // console.log(city);
 

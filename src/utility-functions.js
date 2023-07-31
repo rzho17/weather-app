@@ -21,7 +21,7 @@ const switchDegree = (city) => {
   //   let switched;
 
   return () => {
-    clearForecast();
+    // clearForecast();
     removeError();
     //Allows the switch between metric and imperial units without having to double click after search
     if (switched === fahrenheit) {
