@@ -83,19 +83,28 @@ label {
 }
 
 .searchContainer > input[type="submit"] {
+  display: flex;
+  justify-self: center;
+  align-items: center;
   height: 2rem;
   width: 2rem;
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  /* background-color: var(--dark); */
 
-  border: 1px solid var(--highlightYellow);
+  /* border: 1px solid var(--highlightYellow); */
+
+  border: none;
 
   margin-right: 0.5rem;
+  /* padding: 0.5rem; */
+  color: var(--white);
+  background-color: var(--dark);
 
-  background-image: url(assets/sun.jpg);
-  background-size: cover;
+  /* background-image: url(assets/searchIcon.png); */
+  /* background-size: cover; */
 }
 
 /* weather info */
@@ -289,6 +298,12 @@ main {
   background: var(--foreground);
 }
 
+.detailBoxTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .detailBoxInfoData {
   font-size: 2.5rem;
   padding: 0.5rem;
@@ -310,6 +325,13 @@ main {
   align-self: flex-start;
 }
 
+/* effects */
+
+.switchTempBtn:hover {
+  cursor: pointer;
+  color: var(--highlightYellow);
+  border-color: var(--highlightYellow);
+}
 /* Media queries */
 
 @media only screen and (min-width: 768px) {
