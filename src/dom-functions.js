@@ -1,4 +1,4 @@
-import { fromUnixTime, getDate } from "date-fns";
+import { fromUnixTime, getDate, getTime } from "date-fns";
 import {
   getLocalDate,
   findMonth,
@@ -32,6 +32,33 @@ export const removeError = () => {
   }
 };
 
+const testTime = (weatherTime) => {
+  const currentDate = new Date(weatherTime);
+
+  const currentTimeString = currentDate.toString();
+
+  const time = parseInt(currentTimeString.substring(16, 18), 10);
+  //   console.log(time);
+  return time;
+};
+
+const switchTheme = (time) => {
+  const currentTime = testTime(time);
+  const body = document.querySelector("body");
+
+  if (currentTime >= 20 || currentTime <= 7) {
+    // console.log("night");
+    console.log(time);
+    body.classList.remove("day");
+    // body.classList.toggle("day");
+  }
+  if (currentTime > 6 && currentTime <= 19) {
+    body.classList.remove("day");
+    body.classList.toggle("day");
+  }
+  //   console.log(currentTime);
+};
+
 export const updateWeatherInfo = (weatherData) => {
   //   clearForecast();
   console.log(weatherData);
@@ -53,6 +80,8 @@ export const updateWeatherInfo = (weatherData) => {
   getHours = setLowMinutes(getHours);
 
   const currentMonth = fromUnixTime(weatherData.dt);
+
+  switchTheme(date);
 
   //   console.log(date);
 
@@ -207,6 +236,7 @@ export const makeForecastContainer = (forecastData, index, high, low) => {
 };
 
 export const updateForecastInfo = (weatherData) => {
+  clearForecast();
   findForecastHigh(weatherData);
   findForecastLow(weatherData);
 };

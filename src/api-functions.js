@@ -34,12 +34,12 @@ const weatherFetch = async (city, unit) => {
 
     const result = await currentWeather.json();
 
+    // clearForecast();
     forecastFetch(result.coord.lat, result.coord.lon, apiKey, unit);
 
     updateWeatherInfo(result);
 
     updateDetailBox(result);
-    clearForecast();
 
     // console.log(city);
 
