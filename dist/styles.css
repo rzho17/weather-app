@@ -566,6 +566,10 @@ main {
   .dataTemp {
     font-size: 1.2rem;
   }
+
+  .switchTempBtn {
+    margin-right: 1rem;
+  }
   .miniTitle,
   .switchTempBtn,
   .fcHighlight {
