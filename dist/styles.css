@@ -37,7 +37,7 @@ body {
 }
 
 img {
-  height: 2rem;
+  /* height: 2rem; */
 }
 
 header {
@@ -345,10 +345,14 @@ main {
   body {
     justify-content: space-evenly;
 
-    border: 1px solid;
+    border: 5px solid;
   }
 
+  h1 {
+    border: 1px solid;
+  }
   header {
+    border: 1px solid;
     /* justify-self: center; */
     /* width: 100vw; */
     /* grid-area: search;
@@ -361,9 +365,10 @@ main {
     display: flex;
     justify-content: space-evenly;
 
-    /* width: 100%; */
+    /* min-width: 95vw; */
+    width: 100%;
     max-width: 100%;
-    gap: 2rem;
+    gap: 1rem;
     /* width: 100%; */
     border: 1px solid;
     /* display: grid;
@@ -387,6 +392,7 @@ main {
   .weatherInfo {
     flex-grow: 2;
 
+    width: 150rem;
     order: 2;
   }
 
@@ -400,12 +406,16 @@ main {
   }
 
   .forecastWrapper {
+    display: flex;
     border: 1px solid red;
     width: 100%;
     position: relative;
     order: 3;
 
     flex-shrink: 1;
+
+    justify-content: center;
+    align-items: center;
   }
 
   .forecastControl {
@@ -472,16 +482,41 @@ main {
   }
 
   .detailBoxContainer {
-    grid-template-rows: max-content, max-content;
-    gap: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    padding-right: 0;
   }
 
   .detailBox {
-    width: 8rem;
-    justify-self: center;
-    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    width: 100%;
+    height: 4.5rem;
   }
 
+  .detailBoxInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    gap: 3rem;
+    height: max-content;
+    width: 100%;
+  }
+
+  .detailBoxInfoData {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    width: 6rem;
+  }
+  .dataTemp {
+    font-size: 1.2rem;
+  }
   .miniTitle,
   .switchTempBtn,
   .fcHighlight {
