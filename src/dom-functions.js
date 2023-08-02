@@ -11,8 +11,18 @@ import {
   findWindSpeed,
 } from "./utility-functions";
 
+const showForecastError = () => {
+  const forecastWrapper = document.querySelector(".forecastWrapper");
+  const errorText = document.createElement("div");
+  errorText.className = "errorText";
+
+  errorText.textContent = "Invalid Location Data :(";
+
+  forecastWrapper.append(errorText);
+};
+
 export const showError = () => {
-  const header = document.querySelector("header");
+  const form = document.querySelector("form");
 
   const error = document.createElement("div");
   error.className = "error";
@@ -20,15 +30,20 @@ export const showError = () => {
   error.textContent =
     "Location not found! Please search a city through 'city', 'city, state', 'city, country'.";
 
-  header.appendChild(error);
+  showForecastError();
+
+  form.append(error);
 };
 
 export const removeError = () => {
-  const header = document.querySelector("header");
+  const form = document.querySelector("form");
   const error = document.querySelector(".error");
+  const forecastWrapper = document.querySelector(".forecastWrapper");
+  const errorText = document.querySelector(".errorText");
 
-  if (header.childElementCount > 1) {
-    header.removeChild(error);
+  if (form.childElementCount > 1) {
+    form.removeChild(error);
+    forecastWrapper.removeChild(errorText);
   }
 };
 
@@ -101,8 +116,14 @@ export const updateWeatherInfo = (weatherData) => {
 
   const [{ icon }] = weather;
 
+  const weatherCondition = weatherData.weather[0].description;
+  const weatherConditionString =
+    weatherCondition.charAt(0).toUpperCase() + weatherCondition.substring(1);
+
+  //   console.log(typeof weatherCondition);
+
   weatherImg.src = `https://openweathermap.org/img/wn/${icon}.png`;
-  conditions.textContent = weatherData.weather[0].description;
+  conditions.textContent = weatherConditionString;
   location.textContent = weatherData.name;
 };
 
@@ -236,6 +257,7 @@ export const makeForecastContainer = (forecastData, index, high, low) => {
 };
 
 export const updateForecastInfo = (weatherData) => {
+  //   console.log("this should run");
   clearForecast();
   findForecastHigh(weatherData);
   findForecastLow(weatherData);
