@@ -1,11 +1,9 @@
-import { fromUnixTime, getDate, getTime } from "date-fns";
+import { fromUnixTime } from "date-fns";
 import {
   getLocalDate,
   findMonth,
   findDay,
   setLowMinutes,
-  setFahrenheit,
-  findForecastHighLow,
   findForecastHigh,
   findForecastLow,
   findWindSpeed,
@@ -53,7 +51,6 @@ const testTime = (weatherTime) => {
   const currentTimeString = currentDate.toString();
 
   const time = parseInt(currentTimeString.substring(16, 18), 10);
-  //   console.log(time);
   return time;
 };
 
@@ -62,20 +59,15 @@ const switchTheme = (time) => {
   const body = document.querySelector("body");
 
   if (currentTime >= 20 || currentTime <= 7) {
-    // console.log("night");
-    console.log(time);
     body.classList.remove("day");
-    // body.classList.toggle("day");
   }
   if (currentTime > 6 && currentTime <= 19) {
     body.classList.remove("day");
     body.classList.toggle("day");
   }
-  //   console.log(currentTime);
 };
 
 export const updateWeatherInfo = (weatherData) => {
-  //   clearForecast();
   console.log(weatherData);
 
   const date = getLocalDate(weatherData.dt, weatherData.timezone);
@@ -98,8 +90,6 @@ export const updateWeatherInfo = (weatherData) => {
 
   switchTheme(date);
 
-  //   console.log(date);
-
   month.textContent = `
     ${findDay(date.getDay())} 
     ${date.getDate()}
@@ -119,8 +109,6 @@ export const updateWeatherInfo = (weatherData) => {
   const weatherCondition = weatherData.weather[0].description;
   const weatherConditionString =
     weatherCondition.charAt(0).toUpperCase() + weatherCondition.substring(1);
-
-  //   console.log(typeof weatherCondition);
 
   weatherImg.src = `https://openweathermap.org/img/wn/${icon}.png`;
   conditions.textContent = weatherConditionString;
@@ -252,12 +240,9 @@ export const makeForecastContainer = (forecastData, index, high, low) => {
 
   fcLow.append(fcTempInfo, highlight);
   fcHigh.append(fcTempHigh, highlightHigh);
-
-  //   console.log("hi");
 };
 
 export const updateForecastInfo = (weatherData) => {
-  //   console.log("this should run");
   clearForecast();
   findForecastHigh(weatherData);
   findForecastLow(weatherData);
@@ -274,14 +259,11 @@ export const updateDetailBox = (weatherData) => {
 
   const high = Math.round(main.temp_max);
   const low = Math.round(main.temp_min);
-  //   console.log(weatherData.main.temp_max);
 
   dailyHigh.textContent = high;
   dailyLow.textContent = low;
   humidity.textContent = main.humidity;
   windSpeed.textContent = findWindSpeed(wind.speed);
-
-  //   windSpeed.textContent = "123123";
 };
 
 export const placeholder = () => {};

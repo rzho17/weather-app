@@ -1,15 +1,10 @@
-import { parseISO, parse } from "date-fns";
 import weatherFetch, { fetchFahrenheit } from "./api-functions";
 import {
   clearForecast,
   makeForecastContainer,
   removeError,
-  setFcLow,
   switchTempText,
   switchTempValue,
-  updateFcImage,
-  updateForecastInfo,
-  updateWeatherInfo,
 } from "./dom-functions";
 
 let switched = "metric";
@@ -18,10 +13,8 @@ const switchDegree = (city) => {
   const fahrenheit = "imperial";
   const celsius = "metric";
   let isSwitched = false;
-  //   let switched;
 
   return () => {
-    // clearForecast();
     removeError();
     //Allows the switch between metric and imperial units without having to double click after search
     if (switched === fahrenheit) {
@@ -40,7 +33,6 @@ const switchDegree = (city) => {
 let currentEvent = null;
 
 export const setFahrenheit = (city) => {
-  //   const tempContainer = document.querySelector(".currentTempContainer");
   const switchTempBtn = document.querySelector(".switchTempBtn");
 
   //ensures the event will be the same instead of a new event being created and attached for each call on setFahrenheit
@@ -58,15 +50,12 @@ const getCity = (() => {
 
   let city;
 
-  //   console.log("hi");
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
     city = formData.get("city");
 
-    console.log(switched);
     weatherFetch(city, switched);
     clearForecast();
 
@@ -74,11 +63,7 @@ const getCity = (() => {
     removeError();
 
     form.reset();
-
-    // city.reset();
   });
-
-  //   setFahrenheit(city);
 })();
 
 // Date functions
@@ -131,15 +116,11 @@ export const findForecastLow = (forecast) => {
   let low = forecast.list[0].main.temp_max;
   let x = 0;
 
-  //   console.log(low);
   for (let i = 0; i <= forecast.list.length; i += 8) {
     for (let j = i; j < i + 8; j++) {
       if (x >= 8) {
         x = 0;
-        // console.log("low", low);
-        // console.log("break");
-        // setFcLow(low);
-        // makeForecastContainer(null, null, null, low);
+
         if (i < forecast.list.length) {
           low = Math.round(forecast.list[j].main.temp_min);
         }
@@ -160,11 +141,8 @@ export const findForecastLow = (forecast) => {
 
 export const findForecastHigh = (forecast) => {
   let high = 0;
-  //   let low = weatherData.list[0].main.temp_max;
   let index = 0;
   let x = 0;
-
-  //   const highLow = temp;
 
   for (let i = 0; i <= forecast.list.length; i += 8) {
     //will set j to equal the previous value of i to find the daily high/low within each 5 day period
@@ -172,19 +150,13 @@ export const findForecastHigh = (forecast) => {
     //this will allow the function to find the daily high/low for each day
     for (let j = i; j < i + 8; j++) {
       if (x >= 8) {
-        // console.log(i);
         x = 0;
-        // index = 0;
-        // console.log("top", high);
-        // console.log(index);
-        // updateFcImage(forecast);
+
         makeForecastContainer(forecast, index, high, findForecastLow(forecast));
 
-        // console.log("break");
         if (i < forecast.list.length) {
           high = Math.round(forecast.list[j].main.temp_max);
           index = j;
-          //   console.log(high);
         }
       }
 
@@ -199,34 +171,6 @@ export const findForecastHigh = (forecast) => {
     }
   }
   switchTempValue(switched);
-
-  //   let low = forecast.list[0].main.temp_max;
-  //   let y = 0;
-
-  //   //   console.log(low);
-  //   for (let i = 0; i <= forecast.list.length; i += 8) {
-  //     for (let j = i; j < i + 8; j++) {
-  //       if (y >= 8) {
-  //         y = 0;
-  //         console.log("low", low);
-  //         console.log("break");
-  //         // setFcLow(low);
-  //         makeForecastContainer(forecast, index, high, low);
-  //         // makeForecastContainer(null, null, null, low);
-  //         if (i < forecast.list.length) {
-  //           low = Math.round(forecast.list[j].main.temp_min);
-  //         }
-  //       }
-
-  //       if (i < forecast.list.length) {
-  //         if (forecast.list[j].main.temp_min < low) {
-  //           low = Math.round(forecast.list[j].main.temp_min);
-  //         }
-  //       }
-
-  //       y++;
-  //     }
-  //   }
 };
 
 export const findWindSpeed = (windSpeed) => {

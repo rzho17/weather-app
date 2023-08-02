@@ -1,4 +1,4 @@
-import getCity, { setFahrenheit, switched } from "./utility-functions";
+import { setFahrenheit } from "./utility-functions";
 import weatherFetch from "./api-functions";
 
 weatherFetch("Vancouver", "metric");
