@@ -14,7 +14,7 @@ body.day {
   --text-color: #000000;
   --foreground: #e1e4e7;
   --gray: #000000;
-  --background: #e7eff9;
+  --background: #b4bcc5;
   --highlightYellow: #ff8c42;
   --dailyLow: #9b9b9b;
   --dailyHigh: var(--text-color);
@@ -405,7 +405,7 @@ main {
     position: relative;
     order: 3;
 
-    flex-shrink: 3;
+    flex-shrink: 1;
   }
 
   .forecastControl {
@@ -420,7 +420,7 @@ main {
   }
 
   .detailBoxContainer {
-    flex-shrink: 2;
+    flex-shrink: 1;
     order: 1;
   }
   .forecast {
@@ -471,8 +471,15 @@ main {
     justify-content: space-between;
   }
 
+  .detailBoxContainer {
+    grid-template-rows: max-content, max-content;
+    gap: 0;
+  }
+
   .detailBox {
-    width: 7rem;
+    width: 8rem;
+    justify-self: center;
+    align-self: center;
   }
 
   .miniTitle,
